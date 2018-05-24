@@ -1,0 +1,36 @@
+Specification of how the bot interaction is to work with the discord
+
+1. Configuration
+    a. Setup for frequency of pokemon.
+        - Options of how to determine what pokemon there are.
+2. Initialization
+    a. Channel Creation - to avoid spam (optional)
+3. Command List
+    a. `explore
+        1. Choose a starter if user has not already
+        2. If starter pokemon has been chosen
+            - Persist the users choice
+            - Initialize pokemon with pseudorandom stats
+        3. Ask what region they'd like to visit
+            - Options:
+                1. Johto
+                2. Hoenn
+                3. Kanto
+                4. Sinnoh
+                5. Sevii Islands
+        
+    b. `battle
+        - double battles?
+    c. `campaign
+        1. Ask what region they'd like to visit
+            - Options:
+                1. Johto
+                2. Hoenn
+                3. Kanto
+                4. Sinnoh
+                5. Sevii Islands
+        2. Depending on what their choice was, let them choose a starter for that region.
+
+    d. `trade
+        1. basically update the owner ID on each pokemon
+    e. `pokemon-amount
