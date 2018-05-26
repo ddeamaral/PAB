@@ -2,17 +2,21 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
-from pprint import pprint
+from pprint import pprint as p
 from explore import begin_exploration, has_begun_exploring, has_chosen_starter
 from secrets import key
+from pymongo import MongoClient
 
-
+mongoClient = MongoClient('localhost', 27017)
 bot = Bot(command_prefix='`')
 
 @bot.event
 async def on_ready():
     print("on ready has been called")
     print(bot.user.id)
+    db = mongoClient.get_database("poke-adventures")
+    pdb = db["users"]
+    pdb.insert_one({"userId": bot.user.id, "currentPokemon": []})
     begin_exploration("")
 
 @bot.command(pass_context=True)
@@ -21,8 +25,8 @@ async def ping(context):
 
 @bot.command(pass_context=True)
 async def hello(context, user: discord.Member):
-    pprint(dir(user))
-    pprint(user.server)
+    p(dir(user))
+    p(user.server)
     if user is not None:
         await bot.say("hello there " + user.display_name)
     else:
@@ -30,9 +34,9 @@ async def hello(context, user: discord.Member):
 
 @bot.command(pass_context=True, pass_server=True)
 async def bans(context):
-    pprint(dir(context))
-    pprint(dir(context.message))
-    pprint(context.message.content)
+    p(dir(context))
+    p(dir(context.message))
+    p(context.message.content)
 
 @bot.command(pass_context=True)
 async def explore(context):
